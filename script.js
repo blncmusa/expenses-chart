@@ -1,6 +1,11 @@
 fetch('data.json')
   .then(response => response.json())
   .then(expenses => {
+
+    const monthlyBalance = document.getElementById("monthly-balance")
+    const total = expenses.reduce((acc, expense) => acc + expense.amount, 0)
+    monthlyBalance.textContent = `£${total}`;
+
     const chartData = {
       labels: expenses.map(expense => expense.day),
       datasets: [{
@@ -37,8 +42,10 @@ fetch('data.json')
             legend: {
                 labels: {
                     font: {
-                        size: 20
-                    }
+                        size: 30,
+                        weight: 700
+                    },
+                    boxWidth: 0
                 }
             }
         }
